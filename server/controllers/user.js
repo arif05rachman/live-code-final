@@ -5,6 +5,7 @@ class Controller{
     
     static login(req, res, next){
         const { username, password } = req.body
+        console.log(req.body)
         User
         .findOne({
             where:{username:username}
@@ -21,7 +22,7 @@ class Controller{
                     const token = generateToken(payload)
                     res.status(200).json({token: token, id: data.id, username: data.username})
                 }else{
-                    throw createError(401, 'Invalid username or Password')
+                    throw {message: 'Invalid username or Password'}
                 }
             }
         })
